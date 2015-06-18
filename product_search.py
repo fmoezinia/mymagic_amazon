@@ -1,8 +1,5 @@
 from amazon.api import AmazonAPI
 
-
-
-
 class Itemsearch(object):
 	
 
@@ -44,17 +41,45 @@ class Itemsearch(object):
 		except IndexError:
 			return 'No product available'	
 
+	
+
+	def prod_price(self, product_asin):
+		#insert amazon web services credentials
+		AMAZON_ACCESS_KEY = 'AKIAJGEKFL3UEU6QMCPQ'
+		AMAZON_SECRET_KEY = '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'
+		#associate TAG must be updated every 180 days, make new amazon associates account to get new tag
+		AMAZON_ASSOC_TAG = 'ignacio0ba-20'
+
+		amazon = AmazonAPI(AMAZON_ACCESS_KEY, AMAZON_SECRET_KEY, AMAZON_ASSOC_TAG)
+
+		the_product = amazon.lookup(ItemId='' + product_asin + '')
+
+		found_product_price = the_product.price_and_currency
 
 
-customer_product = Itemsearch('xxxasdfasdfafdsx')
-print customer_product.prod_search()
-print customer_product.prod_asin()
+
+# customer_product = Itemsearch(product)
+customer_product = Itemsearch('arsenal shirt')
+
+product_name = customer_product.prod_search()
+print product_name
+product_asin = customer_product.prod_asin()
+print product_asin
+product_price_and_currency = customer_product.prod_price(product_asin)
+print product_price_and_currency
 
 
-#customer_product = Itemsearch(product)
+
+
+
 
 
 #class Item_asin_search(Itemsearch):
+
+
+#adding item to cart
+
+
 	
 
 
